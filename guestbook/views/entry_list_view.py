@@ -11,6 +11,7 @@ class EntryListView(PaginateByMixin, ListView):
     context_object_name = 'entries'
     ordering = ['-date']
     paginate_by = 3
+    order = '-date'
     filter = ''
 
     form = EntryForm()
@@ -26,14 +27,15 @@ class EntryListView(PaginateByMixin, ListView):
 
     def get_ordering(self):
         """Allows to customize sorting order"""
-        self.ordering[0] = self.request.GET.get('ordering', self.ordering[0])
-        return self.ordering
+        if 'order' in self.request.GET:
+            self.order = self.request.GET['order']
+        return self.order
 
     def get_context_data(self, **kwargs):
         ctx = super(ListView, self).get_context_data(**kwargs)
         ctx['form'] = self.form
         ctx['filter'] = self.filter
-        ctx['ordering'] = self.ordering[0]
+        ctx['order'] = self.order
         return ctx
 
     def post(self, request):
