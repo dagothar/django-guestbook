@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'guestbook.apps.GuestbookConfig',
     # third party apps
     'widget_tweaks',
+    'bootstrapform',
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',

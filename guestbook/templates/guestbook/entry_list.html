@@ -1,14 +1,18 @@
 {% extends 'guestbook/base.html' %}
+{% load bootstrap %}
 
 {% block title %}Entry list{% endblock title %}
 
 {% block content %}
   <!-- add new entry form -->
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit" class="btn btn-default">Add new entry</button>
-  </form>
+  <div>
+    <h3>Please add a new message:</h3>
+    <form action="{% url 'entry_list' %}" method="post">
+      {% csrf_token %}
+      {{ form|bootstrap }}
+      <button type="submit" class="btn btn-default">Add new entry</button>
+    </form>
+  </div>
 
   <!-- list of entries -->
   <div>

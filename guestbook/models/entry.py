@@ -1,10 +1,11 @@
 from django.db import models
+from datetime import datetime
 
 
 class Entry(models.Model):
     message = models.TextField()
     author = models.CharField(max_length=255)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return '<Entry> {author} @ {date}: "{short}..."'.format(
