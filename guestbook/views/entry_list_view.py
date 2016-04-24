@@ -3,9 +3,10 @@ from django.shortcuts import render
 
 from .. import models
 from ..forms import EntryForm
+from paginate_by_mixin import PaginateByMixin
 
 
-class EntryListView(ListView):
+class EntryListView(PaginateByMixin, ListView):
     model = models.Entry
     context_object_name = 'entries'
     ordering = ['-date']
@@ -16,13 +17,6 @@ class EntryListView(ListView):
     def get_ordering(self):
         """Allows customizing sorting"""
         return self.ordering
-
-    def get_paginate_by(self, queryset):
-        """Allows customizing paginate_by by checking for optional GET request
-        parameter: ?paginate_by
-        """
-        paginate_by = self.request.GET.get('paginate_by', self.paginate_by)
-        return paginate_by
 
     def get_context_data(self, **kwargs):
         """Adds form data to the context"""
