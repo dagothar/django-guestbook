@@ -8,7 +8,7 @@ from ..forms import EntryForm
 class EntryListView(ListView):
     model = models.Entry
     context_object_name = 'entries'
-    ordering = ['date']
+    ordering = ['-date']
     paginate_by = 3
 
     form = EntryForm()
