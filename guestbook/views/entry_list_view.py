@@ -15,13 +15,14 @@ class EntryListView(PaginateByMixin, ListView):
     form = EntryForm()
 
     def get_ordering(self):
-        """Allows customizing sorting"""
+        """Allows to customize sorting order"""
+        self.ordering[0] = self.request.GET.get('ordering', self.ordering[0])
         return self.ordering
 
     def get_context_data(self, **kwargs):
-        """Adds form data to the context"""
         ctx = super(ListView, self).get_context_data(**kwargs)
         ctx['form'] = self.form
+        ctx['ordering'] = self.ordering[0]
         return ctx
 
     def post(self, request):
