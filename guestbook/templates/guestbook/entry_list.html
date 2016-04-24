@@ -1,0 +1,36 @@
+{% extends 'guestbook/base.html' %}
+
+{% block title %}Entry list{% endblock title %}
+
+{% block content %}
+  <!-- add new entry form -->
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="btn btn-default">Add new entry</button>
+  </form>
+
+  <!-- list of entries -->
+  <div>
+    <h3>Previous entries:</h3>
+
+    <ul class="list-group">
+      {% for entry in entries %}
+        <li class="list-group-item">
+          <blockquote>
+            <p>{{ entry.message }}</p>
+            <footer>{{ entry.author }} @ {{ entry.date }}</footer>
+          </blockquote>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+      <ul class="pager">
+        {% if page_obj.has_previous %}<li class="previous"><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>{% endif %}
+        {% if page_obj.has_next %}<li class="next"><a href="?page={{ page_obj.next_page_number }}">Next</a></li>{% endif %}
+      </ul>
+    {% endif %}
+  </div>
+
+{% endblock content %}
