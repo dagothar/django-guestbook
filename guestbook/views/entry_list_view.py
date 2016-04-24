@@ -20,7 +20,8 @@ class EntryListView(PaginateByMixin, ListView):
         objects = super(ListView, self).get_queryset()
         if 'filter' in self.request.GET:
             self.filter = self.request.GET['filter']
-        objects = objects.filter(author__contains=self.filter)
+        if self.filter:
+            objects = objects.filter(author__contains=self.filter)
         return objects
 
     def get_ordering(self):
@@ -31,6 +32,7 @@ class EntryListView(PaginateByMixin, ListView):
     def get_context_data(self, **kwargs):
         ctx = super(ListView, self).get_context_data(**kwargs)
         ctx['form'] = self.form
+        ctx['filter'] = self.filter
         ctx['ordering'] = self.ordering[0]
         return ctx
 
