@@ -1,4 +1,4 @@
-class PaginateByMixin():
+class ParametrizedPaginationMixin():
     """Allows customizing paginate_by by checking for optional GET request
     parameter: ?paginate_by
     """

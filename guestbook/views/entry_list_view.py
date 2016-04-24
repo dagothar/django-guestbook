@@ -3,10 +3,10 @@ from django.shortcuts import render
 
 from .. import models
 from ..forms import EntryForm
-from paginate_by_mixin import PaginateByMixin
+from parametrized_pagination_mixin import ParametrizedPaginationMixin
 
 
-class EntryListView(PaginateByMixin, ListView):
+class EntryListView(ParametrizedPaginationMixin, ListView):
     model = models.Entry
     context_object_name = 'entries'
     ordering = ['-date']

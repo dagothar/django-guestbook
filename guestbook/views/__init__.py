@@ -1,3 +1,3 @@
 from test_view import TestView
 from entry_list_view import EntryListView
-from paginate_by_mixin import PaginateByMixin
+from parametrized_pagination_mixin import ParametrizedPaginationMixin
