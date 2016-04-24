@@ -11,8 +11,17 @@ class EntryListView(PaginateByMixin, ListView):
     context_object_name = 'entries'
     ordering = ['-date']
     paginate_by = 3
+    filter = ''
 
     form = EntryForm()
+
+    def get_queryset(self):
+        """Filters the queried objects by the author"""
+        objects = super(ListView, self).get_queryset()
+        if 'filter' in self.request.GET:
+            self.filter = self.request.GET['filter']
+        objects = objects.filter(author__contains=self.filter)
+        return objects
 
     def get_ordering(self):
         """Allows to customize sorting order"""

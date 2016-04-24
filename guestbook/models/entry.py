@@ -8,7 +8,7 @@ class Entry(models.Model):
     date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
-        return '<Entry> {author} @ {date}: "{short}..."'.format(
+        return '{author} @ {date}: "{short}..."'.format(
             author=self.author,
             date=self.date.strftime('%Y/%m/%d %H:%M'),
             short=self.message[:20],

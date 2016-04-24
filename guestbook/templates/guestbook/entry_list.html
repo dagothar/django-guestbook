@@ -24,20 +24,26 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <b>Previous entries</b>
-      <span class="pull-right">Order by date:
-      {% if ordering == '-date' %}
-        <b>newest first</b>
-      {% else %}
-        <a href="?ordering=-date">newest first</a>
-      {% endif %}
-       |
-      {% if ordering == 'date' %}
-        <b>oldest first</b>
-      {% else %}
-        <a href="?ordering=date">oldest first</a></span>
-      {% endif %}
+
+      <span class="pull-right">
+        Order by date:
+        {% if ordering == '-date' %}
+          <b>newest first</b>
+        {% else %}
+          <a href="?ordering=-date">newest first</a>
+        {% endif %}
+         |
+        {% if ordering == 'date' %}
+          <b>oldest first</b>
+        {% else %}
+          <a href="?ordering=date">oldest first</a>
+        {% endif %}
+      </span>
+
     </div>
+
     <div class="panel-body">
+
       {% for entry in entries %}
         <blockquote>
           <p>{{ entry.message }}</p>
@@ -51,6 +57,7 @@
           {% if page_obj.has_next %}<li class="next"><a href="?page={{ page_obj.next_page_number }}&ordering={{ ordering }}">Next</a></li>{% endif %}
         </ul>
       {% endif %}
+
     </div>
   </div>
 
